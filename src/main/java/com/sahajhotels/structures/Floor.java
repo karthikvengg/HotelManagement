@@ -84,4 +84,12 @@ public class Floor {
 
         return threshold;
     }
+
+    public void setFloorNum(int floorNum) {
+        this.floorNum = floorNum;
+    }
+
+    public List<SubCorridor> getSc() {
+        return sc;
+    }
 }

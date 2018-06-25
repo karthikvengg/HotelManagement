@@ -26,4 +26,8 @@ public class AC {
     public void setState(String state) {
         this.state = state;
     }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
 }

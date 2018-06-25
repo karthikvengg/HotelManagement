@@ -14,18 +14,9 @@ public class HotelManagementApp {
 
         Scanner s = new Scanner(System.in);
 
-        System.out.print("Number of floors: ");
-        int floors = s.nextInt();
+        final Hotel hotel1 = getHotel(s);
 
-        System.out.print("HotelManagementApp corridors per floor: ");
-        int mainCorridors = s.nextInt();
-
-        System.out.print("Sub corridors per floor: ");
-        int subCorridors = s.nextInt();
-
-        final Hotel hotel1 = new Hotel(floors, mainCorridors, subCorridors);
         final List<Floor> allFloors = hotel1.getAllFloors();
-
 
         printPowerConsumed(allFloors);
 
@@ -37,7 +28,20 @@ public class HotelManagementApp {
         Sensors.inputsFromSensors(s, hotel1, allFloors, j);
     }
 
-    public static void printPowerConsumed(List<Floor> allFloors) {
+    private static Hotel getHotel(Scanner s) {
+        System.out.print("Number of floors: ");
+        int floors = s.nextInt();
+
+        System.out.print("HotelManagementApp corridors per floor: ");
+        int mainCorridors = s.nextInt();
+
+        System.out.print("Sub corridors per floor: ");
+        int subCorridors = s.nextInt();
+
+        return new Hotel(floors, mainCorridors, subCorridors);
+    }
+
+    private static void printPowerConsumed(List<Floor> allFloors) {
         for (Floor floor : allFloors) {
             System.out.println("Max power consumption allowed in Floor " +
                     floor.getFloorNum() + ": " + floor.getPowerThreshold());

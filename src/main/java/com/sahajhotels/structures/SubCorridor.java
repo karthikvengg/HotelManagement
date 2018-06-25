@@ -4,10 +4,10 @@ import com.sahajhotels.appliances.AC;
 import com.sahajhotels.appliances.Light;
 
 public class SubCorridor {
-    public static final int POWER_PER_LIGHT = 5;
-    public static final int POWER_PER_AC = 10;
-    public static final String OFF = "OFF";
-    public static final String ON = "ON";
+    private static final int POWER_PER_LIGHT = 5;
+    private static final int POWER_PER_AC = 10;
+    private static final String OFF = "OFF";
+    private static final String ON = "ON";
     private Light light;
     private AC ac;
     private int subCorridorNum;
@@ -38,7 +38,7 @@ public class SubCorridor {
 
     public void setMovement(boolean state,long millis) {
         movement = state;
-        if(movement == true) {
+        if(movement) {
             light.setState(ON);
             ac.setState(ON);
             try {
@@ -59,5 +59,41 @@ public class SubCorridor {
 
     public int getPowerThreshold() {
         return powerThreshold;
+    }
+
+    public static int getPowerPerLight() {
+        return POWER_PER_LIGHT;
+    }
+
+    public static int getPowerPerAc() {
+        return POWER_PER_AC;
+    }
+
+    public static String getOFF() {
+        return OFF;
+    }
+
+    public static String getON() {
+        return ON;
+    }
+
+    public Light getLight() {
+        return light;
+    }
+
+    public void setLight(Light light) {
+        this.light = light;
+    }
+
+    public void setAc(AC ac) {
+        this.ac = ac;
+    }
+
+    public void setSubCorridorNum(int subCorridorNum) {
+        this.subCorridorNum = subCorridorNum;
+    }
+
+    public void setMovement(boolean movement) {
+        this.movement = movement;
     }
 }

@@ -23,4 +23,11 @@ public class Hotel {
         return floors.get(floorNumber-1);
     }
 
+    public List<Floor> getFloors() {
+        return floors;
+    }
+
+    public void setFloors(List<Floor> floors) {
+        this.floors = floors;
+    }
 }
