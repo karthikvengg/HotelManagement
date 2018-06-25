@@ -1,8 +1,13 @@
 package com.sahajhotels.structures;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class Floor {
 
     private int floorNum;
@@ -10,6 +15,10 @@ public class Floor {
     private List<SubCorridor> sc;
 
     public Floor() {
+        c = new ArrayList<MainCorridor>();
+        sc = new ArrayList<SubCorridor>();
+        c.add(new MainCorridor());
+        sc.add(new SubCorridor());
     }
 
     public Floor(int mainCorridors, int subCorridors, int floorNum) {
@@ -24,29 +33,9 @@ public class Floor {
             sc.add(new SubCorridor(i + 1));
     }
 
-    public List<MainCorridor> getC() {
-        return c;
-    }
-
-    public void setC(List<MainCorridor> c) {
-        this.c = c;
-    }
-
-    public List<SubCorridor> getSC() {
-        return sc;
-    }
-
-    public void setSc(List<SubCorridor> sc) {
-        this.sc = sc;
-    }
-
-    public int getFloorNum() {
-        return floorNum;
-    }
-
     public void getStatus() {
         for (MainCorridor mc : c) {
-            System.out.print("HotelManagementApp corridor " + mc.getMainCorridorNum() + " ");
+            System.out.print("Main corridor " + mc.getMainCorridorNum() + " ");
             mc.getStatus();
             System.out.println();
         }
@@ -83,13 +72,5 @@ public class Floor {
         }
 
         return threshold;
-    }
-
-    public void setFloorNum(int floorNum) {
-        this.floorNum = floorNum;
-    }
-
-    public List<SubCorridor> getSc() {
-        return sc;
     }
 }

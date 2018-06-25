@@ -1,7 +1,7 @@
 package com.sahajhotels.utils;
 
-import com.sahajhotels.structures.MainCorridor;
 import com.sahajhotels.structures.Floor;
+import com.sahajhotels.structures.MainCorridor;
 import com.sahajhotels.structures.SubCorridor;
 
 import java.util.List;
@@ -19,46 +19,55 @@ public class PowerConsumptionMonitor {
                     for (Floor floor : allFloors) {
                         int power = floor.getPowerConsumption();
                         int threshold = floor.getPowerThreshold();
-                        // turn off when power consumption exceeds
-                        turnOffAC(floor, power, threshold);
-                        // turn on when power consumption is not exceeded
-                        turnOnAC(floor, power, threshold);
+                        if (power > threshold) {
+                            turnOffAC(floor);
+                        } else if (power < threshold) {
+                            turnOnAC(floor);
+                        }
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
         }.start();
     }
 
-    private static void turnOnAC(Floor floor, int power, int threshold) {
-        if (power < threshold - 5) {
-            for (SubCorridor sc : floor.getSC()) {
-                if (sc.getAc().getState().equals(ON)) {
-                    sc.getAc().setState(ON);
-                    break;
-                }
+    public static void turnOnAC(Floor floor) {
+        boolean flag = false;
+        for (SubCorridor sc : floor.getSc()) {
+            if (sc.getAc().getState().equals(OFF)) {
+                sc.getAc().setState(ON);
+                flag = true;
+                break;
             }
-            for (MainCorridor c : floor.getC()) {
-                if (c.getAc().getState().equals(OFF)) {
-                    c.getAc().setState(ON);
-                    break;
-                }
+        }
+        if(flag) return;
+        for (MainCorridor c : floor.getC()) {
+            if (c.getAc().getState().equals(OFF)) {
+                c.getAc().setState(ON);
+                break;
             }
         }
     }
 
-    private static void turnOffAC(Floor floor, int power, int threshold) {
-        if (power > threshold) {
-            for (SubCorridor sc : floor.getSC()) {
-                if (!sc.isMovement()) {
-                    sc.getAc().setState(OFF);
-                    break;
-                }
+
+    public static void turnOffAC(Floor floor) {
+        boolean flag = false;
+        for (SubCorridor sc : floor.getSc()) {
+            if (!sc.isMovement()) {
+                sc.getAc().setState(OFF);
+                flag = true;
+                break;
             }
-            for (MainCorridor c : floor.getC()) {
-                if (!c.isMovement()) {
-                    c.getAc().setState(OFF);
-                    break;
-                }
+        }
+        if(flag) return;
+        for (MainCorridor c : floor.getC()) {
+            if (!c.isMovement()) {
+                c.getAc().setState(OFF);
+                break;
             }
         }
     }

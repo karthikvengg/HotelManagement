@@ -16,7 +16,7 @@ public class HotelManagementApp {
 
         final Hotel hotel1 = getHotel(s);
 
-        final List<Floor> allFloors = hotel1.getAllFloors();
+        final List<Floor> allFloors = hotel1.getFloors();
 
         printPowerConsumed(allFloors);
 
@@ -28,20 +28,31 @@ public class HotelManagementApp {
         Sensors.inputsFromSensors(s, hotel1, allFloors, j);
     }
 
-    private static Hotel getHotel(Scanner s) {
-        System.out.print("Number of floors: ");
-        int floors = s.nextInt();
+    public static Hotel getHotel(Object obj) {
 
-        System.out.print("HotelManagementApp corridors per floor: ");
-        int mainCorridors = s.nextInt();
+        if (obj instanceof Scanner) {
+            Scanner s = (Scanner)obj;
 
-        System.out.print("Sub corridors per floor: ");
-        int subCorridors = s.nextInt();
+            System.out.print("Number of floors: ");
+            int floors = s.nextInt();
 
-        return new Hotel(floors, mainCorridors, subCorridors);
+            System.out.print("Main corridors per floor: ");
+            int mainCorridors = s.nextInt();
+
+            System.out.print("Sub corridors per floor: ");
+            int subCorridors = s.nextInt();
+
+            return new Hotel(floors, mainCorridors, subCorridors);
+        }
+        else if(obj instanceof int[]){
+            int[] vals = (int[])obj;
+            return new Hotel(vals[0], vals[1], vals[2]);
+        }
+        else
+            throw new ClassCastException();
     }
 
-    private static void printPowerConsumed(List<Floor> allFloors) {
+    public static void printPowerConsumed(List<Floor> allFloors) {
         for (Floor floor : allFloors) {
             System.out.println("Max power consumption allowed in Floor " +
                     floor.getFloorNum() + ": " + floor.getPowerThreshold());

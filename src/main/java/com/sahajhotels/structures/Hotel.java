@@ -1,12 +1,22 @@
 package com.sahajhotels.structures;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class Hotel {
     private List<Floor> floors;
 
-    public Hotel(int floors,int mainCorridors,int subCorridors) {
+    public Hotel() {
+        this.floors = new ArrayList<Floor>();
+        floors.add(new Floor());
+    }
+
+    public Hotel(int floors, int mainCorridors, int subCorridors) {
 
         this.floors = new ArrayList<Floor>();
 
@@ -15,19 +25,8 @@ public class Hotel {
         }
     }
 
-    public List<Floor> getAllFloors() {
-        return floors;
-    }
-
     public Floor getFloor(int floorNumber) {
         return floors.get(floorNumber-1);
     }
 
-    public List<Floor> getFloors() {
-        return floors;
-    }
-
-    public void setFloors(List<Floor> floors) {
-        this.floors = floors;
-    }
 }

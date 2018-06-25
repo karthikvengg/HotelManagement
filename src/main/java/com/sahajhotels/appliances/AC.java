@@ -1,33 +1,15 @@
 package com.sahajhotels.appliances;
 
-public class AC {
-    private int power = 10;
-    private String state;
+public class AC extends ApplianceOperations {
+
+    private static final int POWER = 10;
 
     public AC() {
+        this.setPower(POWER);
     }
 
     public AC(int power, String state) {
-        this.power = power;
-        this.state = state;
-    }
-
-    public int getPower() {
-        if(state.equals("ON"))
-            return power;
-        else
-            return 0;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public void setPower(int power) {
-        this.power = power;
+        this.setState(state);
+        this.setPower(power);
     }
 }
