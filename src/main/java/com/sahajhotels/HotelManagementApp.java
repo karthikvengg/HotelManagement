@@ -4,13 +4,18 @@ import com.sahajhotels.structures.Floor;
 import com.sahajhotels.structures.Hotel;
 import com.sahajhotels.utils.PowerConsumptionMonitor;
 import com.sahajhotels.utils.Sensors;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
 import java.util.Scanner;
 
+@SpringBootApplication
 public class HotelManagementApp {
 
     public static void main(String[] args) {
+
+        SpringApplication.run(HotelManagementApp.class,args);
 
         Scanner s = new Scanner(System.in);
 
